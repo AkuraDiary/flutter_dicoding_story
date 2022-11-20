@@ -5,16 +5,15 @@ import 'package:form_validator/form_validator.dart';
 
 import '../../data/model/user_model.dart';
 
-class Signin extends StatefulWidget {
-  const Signin({Key? key}) : super(key: key);
+class SigninPage extends StatefulWidget {
+  const SigninPage({Key? key}) : super(key: key);
 
   @override
-  State<Signin> createState() => _SigninState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _SigninState extends State<Signin> {
+class _SigninPageState extends State<SigninPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool is_mitra = false;
 
   void validateAndSave() {
     final FormState form = _formKey.currentState!;
@@ -34,7 +33,7 @@ class _SigninState extends State<Signin> {
 
   void _validateAndSubmit() {
     if (_formKey.currentState!.validate()) {
-      //TODO do signin and save the user session
+      //TODO do register in api
 
       // debugPrint(_user.toString());
       // Navigator.pop(context);

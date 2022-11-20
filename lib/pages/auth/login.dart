@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dicoding_story/data/session/user_sessions.dart';
+import 'package:dicoding_story/data/local/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/signin.dart';
 import 'package:dicoding_story/pages/home.dart';
 import 'package:form_validator/form_validator.dart';
@@ -25,7 +25,8 @@ class _LoginPageState extends State<LoginPage> {
       //insert the data into user session
       debugPrint('Form is valid');
 
-      UserSessions.saveSession(emailController.text, passwordController.text, "halo", "cuy");
+      //save user session here
+      // UserSessions.saveSession();
 
       Navigator.pop(context);
       Navigator.push(
@@ -131,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Signin()));
+                              builder: (context) => const SigninPage()));
                     },
                   )
                 ],

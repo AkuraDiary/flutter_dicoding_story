@@ -12,7 +12,7 @@ class User{
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = <String, String?>{};
     data['name'] = name;
     data['userId'] = userId;
     data['token'] = token;

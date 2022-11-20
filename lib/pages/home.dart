@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:dicoding_story/data/session/user_sessions.dart';
+import 'package:dicoding_story/data/local/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
