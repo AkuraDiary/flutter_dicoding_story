@@ -35,12 +35,8 @@ class _SigninState extends State<Signin> {
   void _validateAndSubmit() {
     if (_formKey.currentState!.validate()) {
       //TODO do signin and save the user session
-      user _user = user(name: nameController.text,
-          email: emailController.text,
-          password: passwordController.text,
-          role: is_mitra ? "mitra" : "user",
-      );
-      debugPrint(_user.toString());
+
+      // debugPrint(_user.toString());
       // Navigator.pop(context);
       // Navigator.push(
       //   context,
