@@ -31,8 +31,6 @@ class _SigninState extends State<Signin> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController nibController = TextEditingController();
-  TextEditingController bussinessNameController = TextEditingController();
 
   void _validateAndSubmit() {
     if (_formKey.currentState!.validate()) {
@@ -56,7 +54,6 @@ class _SigninState extends State<Signin> {
     nameController.dispose();
     passwordController.dispose();
     emailController.dispose();
-    nibController.dispose();
     super.dispose();
   }
 
@@ -135,54 +132,6 @@ class _SigninState extends State<Signin> {
                   ),
                 ),
               ),
-              CheckboxListTile(
-                title: const Text(
-                  'Saya Seorang Mitra UMKM',
-                  style: TextStyle(
-                    color: Color(0xff718096),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                value: is_mitra,
-                onChanged: (bool? value) {
-                  setState(
-                        () {
-                      is_mitra = value!;
-                    },
-                  );
-                },
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-              is_mitra
-                  ? Container(
-                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: TextFormField(
-                  controller: nibController,
-                  validator: ValidationBuilder().required().build(),
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffBAA394))),
-                    labelText: 'Nomor Induk Berusaha',
-                  ),
-                ),
-              )
-                  : Container(),
-              is_mitra
-                  ? Container(
-                margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: TextFormField(
-                  enabled: is_mitra,
-                  controller: nibController,
-                  validator: ValidationBuilder().required().build(),
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xffBAA394))),
-                    labelText: 'NIB anda',
-                  ),
-                ),
-              )
-                  : Container(),
               Container(
                   height: 50,
                   margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
