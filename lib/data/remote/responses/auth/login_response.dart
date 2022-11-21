@@ -1,13 +1,13 @@
-import '../../model/user_model.dart';
+import '../../../model/user_model.dart';
 
-class loginResponse {
+class LoginResponse {
   bool? error;
   String? message;
   User? loginResult;
 
-  loginResponse({this.error, this.message, this.loginResult});
+LoginResponse({this.error, this.message, this.loginResult});
 
- loginResponse.fromJson(Map<String, dynamic> json) {
+ LoginResponse.fromJson(Map<String, dynamic> json) {
     error = json['error'];
     message = json['message'];
     loginResult = json['loginResult'] != null
@@ -16,7 +16,7 @@ class loginResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['error'] = error;
     data['message'] = message;
     if (loginResult != null) {

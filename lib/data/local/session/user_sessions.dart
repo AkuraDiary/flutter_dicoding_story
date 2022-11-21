@@ -14,7 +14,7 @@ class UserSessions {
   static const String _nameKey = 'name';
   static const String _userIdKey = 'userId';
 
-  static Future<void> saveSession(User user) async {
+  static saveSession(User user) async {
     debugPrint('saving session');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final Map<String, String> session = <String, String>{
@@ -24,20 +24,21 @@ class UserSessions {
       _userIdKey: user.userId!
 
     };
-    prefs.setString(_key, json.encode(session));
+    prefs.setString(_key, json.encode(session)).then((value) => debugPrint('saved session: $value'));
+    debugPrint('saved session: ${prefs.getString(_key)}');
   }
 
-  static Future<Map<String, dynamic>?> getSession() async {
+  static Future<User?> getSession() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? session = prefs.getString(_key);
     if (session == null) {
       return null;
     }
     debugPrint(session.toString());
-    return json.decode(session) as Map<String, String?>;
+    return User.fromJson(json.decode(session));
   }
 
-  static Future<void> deleteSession() async {
+  static deleteSession() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(_key);
   }

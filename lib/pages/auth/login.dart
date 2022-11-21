@@ -1,9 +1,11 @@
+import 'package:dicoding_story/data/remote/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dicoding_story/data/local/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/signin.dart';
 import 'package:dicoding_story/pages/home.dart';
 import 'package:form_validator/form_validator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../data/model/user_model.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -18,9 +20,9 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void _validateAndSubmit()  {
+  void _validateAndSubmit() {
     if (_formKey.currentState!.validate()) {
       //insert the data into user session
       debugPrint('Form is valid');
@@ -28,11 +30,25 @@ class _LoginPageState extends State<LoginPage> {
       //save user session here
       // UserSessions.saveSession();
 
-      Navigator.pop(context);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Home()),
-      );
+      ApiService.doLoginUser(emailController.text, passwordController.text)
+          .then((value) {
+        if (value.error == false) {
+          debugPrint(value.message);
+          final user = User(name:value.loginResult!.name, userId:value.loginResult!.userId, token:value.loginResult!.token);
+          UserSessions.saveSession(user).whenComplete(() => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                )
+              });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(value.message!),
+            ),
+          );
+        }
+      });
     }
   }
 

@@ -4,10 +4,12 @@ import 'package:dicoding_story/data/local/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../data/model/user_model.dart';
+
 class Home extends StatelessWidget {
   Home({super.key});
 
-  Future<Map<String, dynamic>?> session = UserSessions.getSession();
+  Future<User?> session = UserSessions.getSession();
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +21,12 @@ class Home extends StatelessWidget {
           children: [
             Text('Home'),
             // get saved user login email
-            FutureBuilder<Map<String, dynamic>?>(
+            FutureBuilder<User?>(
               future: session,
               builder: (BuildContext context,
-                  AsyncSnapshot<Map<String, dynamic>?> snapshot) {
-                if (snapshot.hasData) {
-                  return Text(snapshot.data!['email']!);
+                  AsyncSnapshot<User?> userSession) {
+                if (userSession.hasData) {
+                  return Text(userSession.data!.name!);
                 } else {
                   return Text('No data');
                 }

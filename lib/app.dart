@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:dicoding_story/data/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/login.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'data/local/session/user_sessions.dart';
+import 'data/model/user_model.dart';
 import 'pages/home.dart';
 
 class MyApp extends StatelessWidget {
@@ -20,14 +21,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: FutureBuilder<Map<String, dynamic>?>(
+      home: FutureBuilder<User?>(
         future: UserSessions.getSession(),
-        builder: (BuildContext context, AsyncSnapshot<Map<String, dynamic>?> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
           FlutterNativeSplash.remove();
           if (snapshot.hasData) {
             return Home();
           } else {
-            return LoginPage();
+            return const LoginPage();
           }
         },
       ),
