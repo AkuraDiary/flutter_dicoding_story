@@ -38,6 +38,7 @@ class UserSessions {
     return User.fromJson(json.decode(session));
   }
 
+
   static deleteSession() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(_key);
