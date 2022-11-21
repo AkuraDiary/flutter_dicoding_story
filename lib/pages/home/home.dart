@@ -1,5 +1,6 @@
 
 import 'package:dicoding_story/data/remote/services/api_service.dart';
+import 'package:dicoding_story/pages/home/widgets/story_list.dart';
 import 'package:flutter/material.dart';
 import 'package:dicoding_story/data/local/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/login.dart';
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!)));
       setState(() {
         storiesData = value.listStory!;
+        debugPrint(storiesData.toString());
       });
     });
   }
@@ -44,43 +46,12 @@ class _HomeState extends State<Home> {
             if (userSession.hasData) {
               return Text("Welcome ${userSession.data!.name!}");
             } else {
-              return Text('Home');
+              return const Text('Home');
             }
           },
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('Home'),
-            //show the story list
-            Expanded(
-              child: ListView.builder(
-                itemCount: storiesData.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(storiesData[index].name!),
-                    subtitle: Text(storiesData[index].description!),
-                  );
-                },
-              ),
-            ),
-
-            // logout button
-            ElevatedButton(
-                onPressed: () {
-                  UserSessions.deleteSession();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
-                },
-                child: Text('Logout'))
-          ],
-        ),
-      ),
+      body: StoryList(stories: storiesData),
     );
   }
 }
