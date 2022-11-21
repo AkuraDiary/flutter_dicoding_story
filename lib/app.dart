@@ -3,7 +3,7 @@ import 'package:dicoding_story/pages/auth/login.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'data/local/session/user_sessions.dart';
 import 'data/model/user_model.dart';
-import 'pages/home.dart';
+import 'pages/home/home.dart';
 
 class MyApp extends StatelessWidget {
 

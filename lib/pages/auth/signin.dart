@@ -1,6 +1,7 @@
+import 'package:dicoding_story/data/remote/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dicoding_story/pages/auth/login.dart';
-import 'package:dicoding_story/pages/home.dart';
+import 'package:dicoding_story/pages/home/home.dart';
 import 'package:form_validator/form_validator.dart';
 
 import '../../data/model/user_model.dart';
@@ -33,14 +34,24 @@ class _SigninPageState extends State<SigninPage> {
 
   void _validateAndSubmit() {
     if (_formKey.currentState!.validate()) {
-      //TODO do register in api
-
-      // debugPrint(_user.toString());
-      // Navigator.pop(context);
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => Home()),
-      // );
+      //do register in api
+      ApiService.registerUser(emailController.text, passwordController.text,
+              nameController.text)
+          .then(
+        (value) => {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(value.message!))),
+          debugPrint(value.message!),
+          if (value.error == false)
+            {
+              Navigator.pop(context),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              )
+            }
+        },
+      );
     }
   }
 
@@ -110,7 +121,7 @@ class _SigninPageState extends State<SigninPage> {
                   obscureText: _obscureText,
                   controller: passwordController,
                   validator:
-                  ValidationBuilder().required().minLength(6).build(),
+                      ValidationBuilder().required().minLength(6).build(),
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffBAA394))),
@@ -122,8 +133,8 @@ class _SigninPageState extends State<SigninPage> {
                           });
                         },
                         icon: _obscureText
-                            ? Icon(Icons.visibility)
-                            : Icon(Icons.visibility_off)),
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off)),
                   ),
                 ),
               ),

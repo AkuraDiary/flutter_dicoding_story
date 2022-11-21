@@ -4,7 +4,7 @@ import 'package:dicoding_story/data/local/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/model/user_model.dart';
+import '../../data/model/user_model.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});

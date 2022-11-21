@@ -2,7 +2,7 @@ import 'package:dicoding_story/data/remote/services/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:dicoding_story/data/local/session/user_sessions.dart';
 import 'package:dicoding_story/pages/auth/signin.dart';
-import 'package:dicoding_story/pages/home.dart';
+import 'package:dicoding_story/pages/home/home.dart';
 import 'package:form_validator/form_validator.dart';
 
 import '../../data/model/user_model.dart';
@@ -26,16 +26,13 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       //insert the data into user session
       debugPrint('Form is valid');
-
-      //save user session here
-      // UserSessions.saveSession();
-
+      // login
       ApiService.doLoginUser(emailController.text, passwordController.text)
           .then((value) {
         if (value.error == false) {
           debugPrint(value.message);
-          final user = User(name:value.loginResult!.name, userId:value.loginResult!.userId, token:value.loginResult!.token);
-          UserSessions.saveSession(user).whenComplete(() => {
+          //save the user session
+          UserSessions.saveSession(value.loginResult!).whenComplete(() => {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Home()),
