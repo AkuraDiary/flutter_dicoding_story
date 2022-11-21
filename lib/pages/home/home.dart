@@ -36,6 +36,7 @@ class Home extends StatelessWidget {
             // logout button
             ElevatedButton(
                 onPressed: () {
+                  UserSessions.deleteSession();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),
