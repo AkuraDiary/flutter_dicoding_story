@@ -1,4 +1,3 @@
-
 import 'package:dicoding_story/data/remote/services/api_service.dart';
 import 'package:dicoding_story/pages/home/widgets/story_list.dart';
 import 'package:flutter/material.dart';
@@ -14,20 +13,19 @@ class Home extends StatefulWidget {
 
   @override
   State<Home> createState() => _HomeState();
-
 }
 
 class _HomeState extends State<Home> {
   Future<User?> session = UserSessions.getSession();
-  List<Story> storiesData= [];
+  List<Story> storiesData = [];
 
   @override
   void initState() {
-
     super.initState();
     //get stories data
     ApiService.getListStory().then((value) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(value.message!)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(value.message!)));
       setState(() {
         storiesData = value.listStory!;
         debugPrint(storiesData.toString());
@@ -41,8 +39,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: FutureBuilder<User?>(
           future: session,
-          builder: (BuildContext context,
-              AsyncSnapshot<User?> userSession) {
+          builder: (BuildContext context, AsyncSnapshot<User?> userSession) {
             if (userSession.hasData) {
               return Text("Welcome ${userSession.data!.name!}");
             } else {
@@ -52,6 +49,11 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: StoryList(stories: storiesData),
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text("Upload Story"),
+        icon: const Icon(Icons.camera_alt),
+        onPressed: () {},
+      ),
     );
   }
 }
