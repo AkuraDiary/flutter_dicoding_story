@@ -6,6 +6,7 @@ import '../../local/session/user_sessions.dart';
 import '../../model/user_model.dart';
 import '../responses/auth/login_response.dart';
 import '../responses/auth/register_response.dart';
+import '../responses/story/detail_story_response.dart';
 import '../responses/story/list_story_response.dart';
 
 class ApiService {
@@ -59,4 +60,5 @@ class ApiService {
       throw Exception('No Internet connection');
     }
   }
+
 }

@@ -1,3 +1,4 @@
+import 'package:dicoding_story/pages/detail/detail.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/model/story_model.dart';
@@ -14,16 +15,22 @@ class StoryList extends StatelessWidget {
       scrollDirection: Axis.vertical,
       crossAxisCount: 1,
       mainAxisSpacing: 2,
-      children: stories.map((story) {
-        return InkWell(
-          child: StoryItemLayout(story: story),
-          onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(story.name!),
-            ));
-          },
-        );
-      }).toList(),
+      children: stories.map(
+        (story) {
+          return InkWell(
+            child: StoryItemLayout(story: story),
+            onTap: () {
+              // Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailPage(story: story),
+                ),
+              );
+            },
+          );
+        },
+      ).toList(),
     );
   }
 }
