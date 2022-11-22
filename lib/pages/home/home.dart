@@ -23,7 +23,8 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     //get stories data
-    ApiService.getListStory().then((value) {
+    ApiService.getListStory(
+    ).then((value) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(value.message!)));
       setState(() {

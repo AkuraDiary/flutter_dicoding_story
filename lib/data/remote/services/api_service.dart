@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import '../../../util/const.dart';
 import '../../local/session/user_sessions.dart';
@@ -44,15 +45,22 @@ class ApiService {
     }
   }
 
-  static Future<ListStoryResponse> getListStory() async {
+  static Future<ListStoryResponse> getListStory({int? page, int? size}) async {
     String userToken =
         await UserSessions.getSession().then((value) => value!.token!);
+    String endpoint = size ==null && page == null ? Const.listStoryUrl : "${Const.listStoryUrl}?page=$page?size=$size";
+    //     : await http.get(
+    //   Uri.parse("${Const.listStoryUrl}?page=$page?size=$size"),
+    //   headers: {'Authorization': 'Bearer $userToken'},
+    // )
+    debugPrint(endpoint);
     try {
-      final response =
-          await http.get(Uri.parse(Const.listStoryUrl), headers: {
-            'Authorization' : 'Bearer $userToken'
-          });
+      final response =  await http.get(
+        Uri.parse(endpoint),
+        headers: {'Authorization': 'Bearer $userToken'},
+      );
       final Map<String, dynamic> responseData = json.decode(response.body);
+      debugPrint(response.body);
       final ListStoryResponse listStoryResponse =
           ListStoryResponse.fromJson(responseData);
       return listStoryResponse;
@@ -60,5 +68,4 @@ class ApiService {
       throw Exception('No Internet connection');
     }
   }
-
 }
