@@ -52,7 +52,7 @@ class _AddStoryPageState extends State<AddStoryPage> {
                         fillColor: Colors.white,
                         focusColor: Colors.white,
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                          borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.all(
                             Radius.circular(10.0),
                           ),

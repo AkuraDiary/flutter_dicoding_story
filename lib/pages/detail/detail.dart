@@ -25,6 +25,7 @@ class DetailPage extends StatelessWidget {
               }),
         ),
         body: Stack(
+          alignment: Alignment.bottomCenter,
           children: <Widget>[
             Image.network(
               story.photoUrl!,
@@ -34,10 +35,13 @@ class DetailPage extends StatelessWidget {
               alignment: Alignment.center,
             ),
             Container(
+              alignment: Alignment.bottomCenter,
+              color: Colors.black.withOpacity(0.5),
+              height: MediaQuery.of(context).size.height*0.1,
               padding: const EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     story.name!,
@@ -51,7 +55,7 @@ class DetailPage extends StatelessWidget {
                     story.description!,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
