@@ -71,7 +71,6 @@ class _LoginPageState extends State<LoginPage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
           child: Stack(children: <Widget>[
-
             ListView(
               children: <Widget>[
                 Container(

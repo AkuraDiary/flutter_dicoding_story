@@ -6,8 +6,8 @@ class Story {
   String? description;
   String? photoUrl;
   String? createdAt;
-  int? lat;
-  int? lon;
+  double? lat;
+  double? lon;
 
   Story(
       {this.id,

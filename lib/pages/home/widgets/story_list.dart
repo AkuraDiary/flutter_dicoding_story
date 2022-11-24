@@ -11,7 +11,7 @@ class StoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
+    return stories.isNotEmpty? GridView.count(
       scrollDirection: Axis.vertical,
       crossAxisCount: 1,
       mainAxisSpacing: 2,
@@ -31,6 +31,6 @@ class StoryList extends StatelessWidget {
           );
         },
       ).toList(),
-    );
+    ) : const Text(":/ no stories");
   }
 }
